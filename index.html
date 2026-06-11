@@ -105,31 +105,29 @@
         .delay-200 { animation-delay: 200ms; }
         .delay-300 { animation-delay: 300ms; }
 
-/* Media Containers */
-.media-container {
-    position: relative;
-    border-radius: 1rem;
-    overflow: hidden;
-}
+        /* Media Containers */
+        .media-container {
+            position: relative;
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+        .media-container img,
+        .media-container model-viewer {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .media-container img {
+            transition: transform 0.7s ease;
+        }    
+        .glass-card:hover .media-container img {
+            transform: scale(1.05);
+        }
+        model-viewer {
+            background: transparent;
+        }    
 
-.media-container img,
-.media-container model-viewer {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
 
-.media-container img {
-    transition: transform 0.7s ease;
-}
-
-.glass-card:hover .media-container img {
-    transform: scale(1.05);
-}
-
-model-viewer {
-    background: transparent;
-}
         
         /* Gradient Text */
         .text-gradient {
@@ -237,22 +235,19 @@ model-viewer {
                 <div class="relative w-full aspect-square lg:aspect-auto lg:h-[600px] animate-float z-10">
                     <!-- Premium Hero Image -->
                     <div class="absolute inset-0 rounded-[2.5rem] overflow-hidden border-8 border-white/50 shadow-2xl">
+                        <video
+                            autoplay
+                            muted
+                            loop
+                            playsinline
+                            preload="auto"
+                            class="w-full h-full object-cover">
+                            <source src="video-hero.mp4" type="video/mp4">
+                        </video>
 
-    <video
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="auto"
-        class="w-full h-full object-cover">
-
-        <source src="video/hero.mp4" type="video/mp4">
-
-    </video>
-
-    <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-
-</div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                        
+                    </div>
                     <!-- Floating Badge -->
                     <div class="absolute -bottom-6 -left-6 bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-white/50 flex items-center gap-4">
                         <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center">
@@ -310,23 +305,19 @@ model-viewer {
                             </div>
                             
                             <!-- Ruang Gambar Pengguna (Placeholder) -->
-                           <model-viewer
-    src="models/gunting.glb"
-    alt="Model 3D Gunting"
-
-    camera-controls
-    auto-rotate
-    auto-rotate-delay="0"
-    rotation-per-second="20deg"
-
-    shadow-intensity="1"
-    exposure="1"
-
-    touch-action="pan-y"
-
-    style="width:100%; height:100%;">
-
-</model-viewer>
+                            <div class="tilt-content mt-auto w-full rounded-2xl overflow-hidden border-2 border-dashed border-indigo-200 relative z-10 aspect-video bg-indigo-50/50 flex items-center justify-center">
+                                <model-viewer
+                                    src="gunting.glb"
+                                    alt="Model 3D Gunting"
+                                    camera-controls
+                                    auto-rotate
+                                    auto-rotate-delay="0"
+                                    rotation-per-second="20deg"
+                                    touch-action="pan-y"
+                                    shadow-intensity="1"
+                                    exposure="1"
+                                    style="width:100%; height:100%;">
+                                </model-viewer>    
                             </div>
                         </div>
                     </div>
@@ -351,23 +342,19 @@ model-viewer {
                                 <p class="text-gray-600 text-sm mb-6">Alat tajam berlubang untuk membawa benang menembusi fabrik.</p>
                             </div>
                             
-                           <model-viewer
-    src="models/jarum.glb"
-    alt="Model 3D Jarum"
-
-    camera-controls
-    auto-rotate
-    auto-rotate-delay="0"
-    rotation-per-second="20deg"
-
-    shadow-intensity="1"
-    exposure="1"
-
-    touch-action="pan-y"
-
-    style="width:100%; height:100%;">
-
-</model-viewer>
+                            <div class="tilt-content mt-auto w-full rounded-2xl overflow-hidden border-2 border-dashed border-teal-200 relative z-10 aspect-video bg-teal-50/50 flex items-center justify-center">
+                                <model-viewer
+                                    src="jarum.glb"
+                                    alt="Model 3D Jarum"
+                                    camera-controls
+                                    auto-rotate
+                                    auto-rotate-delay="0"
+                                    rotation-per-second="20deg"
+                                    touch-action="pan-y"
+                                    shadow-intensity="1"
+                                    exposure="1"
+                                    style="width:100%; height:100%;">
+                                </model-viewer>    
                             </div>
                         </div>
                     </div>
@@ -395,23 +382,20 @@ model-viewer {
                                 <h3 class="text-2xl font-heading font-bold text-gray-800 mb-2">Benang</h3>
                                 <p class="text-gray-600 text-sm mb-6">Lembaran serat panjang digunakan untuk mencantumkan bahagian fabrik.</p>
                             </div>
-                            <model-viewer
-    src="models/benang.glb"
-    alt="Model 3D Benang"
-
-    camera-controls
-    auto-rotate
-    auto-rotate-delay="0"
-    rotation-per-second="20deg"
-
-    shadow-intensity="1"
-    exposure="1"
-
-    touch-action="pan-y"
-
-    style="width:100%; height:100%;">
-
-</model-viewer>
+                            
+                            <div class="tilt-content mt-auto w-full rounded-2xl overflow-hidden border-2 border-dashed border-pink-200 relative z-10 aspect-video bg-pink-50/50 flex items-center justify-center">
+                                <model-viewer
+                                    src="benang.glb"
+                                    alt="Model 3D Benang"
+                                    camera-controls
+                                    auto-rotate
+                                    auto-rotate-delay="0"
+                                    rotation-per-second="20deg"
+                                    touch-action="pan-y"
+                                    shadow-intensity="1"
+                                    exposure="1"
+                                    style="width:100%; height:100%;">
+                                </model-viewer>    
                             </div>
                         </div>
                     </div>
