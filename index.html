@@ -1385,11 +1385,11 @@
                 <p class="text-xl text-black font-slab font-medium">Latar belakang dan butiran rasmi pembangunan e-modul ini.</p>
             </div>
 
-            <!-- Grid Layout Maklumat (3D Premium) -->
-            <div class="max-w-7xl mx-auto grid lg:grid-cols-12 gap-8 lg:gap-12 items-stretch fade-in delay-100 px-4 sm:px-6">
+            <!-- Layout Maklumat (Gambar Atas, Maklumat Bawah) -->
+            <div class="max-w-7xl mx-auto flex flex-col gap-12 fade-in delay-100 px-4 sm:px-6">
                 
-                <!-- Ruang Gambar Profile (Kiri - 5 Columns) - Saiz Full Height Desktop -->
-                <div class="lg:col-span-5 flex justify-center h-[500px] lg:h-auto lg:min-h-[700px]">
+                <!-- Ruang Gambar Profile (Atas - Saiz Full Page Landscape Desktop) -->
+                <div class="w-full flex justify-center h-[350px] sm:h-[500px] lg:h-[650px]">
                     <div class="w-full h-full p-4 sm:p-6 rounded-[3rem] shadow-[0_30px_60px_rgba(0,0,0,0.12),inset_0_4px_20px_rgba(255,255,255,0.9)] border-2 border-white relative group overflow-hidden flex flex-col items-center justify-center bg-gradient-to-br from-white/60 to-white/20 backdrop-blur-xl">
                         <!-- Latar belakang glowing bila hover -->
                         <div class="absolute inset-0 bg-gradient-to-br from-indigo-200/50 to-purple-200/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -1400,101 +1400,101 @@
                             <!-- Ikon & Teks Placeholder (Hilangkan jika dah letak gambar) -->
                             <div class="flex flex-col items-center justify-center p-6 text-center z-10">
                                 <i data-lucide="image-plus" class="w-24 h-24 text-indigo-400 mb-6 group-hover:text-indigo-600 transition-colors group-hover:scale-110 transform duration-300 drop-shadow-md"></i>
-                                <span class="text-indigo-500 font-black text-xl group-hover:text-indigo-700 transition-colors drop-shadow-sm uppercase tracking-wider">
-                                    Ruang Gambar<br><span class="text-sm font-semibold opacity-70">(Format .png)</span>
+                                <span class="text-indigo-500 font-black text-2xl group-hover:text-indigo-700 transition-colors drop-shadow-sm uppercase tracking-wider">
+                                    Ruang Gambar Landscape<br><span class="text-base font-semibold opacity-70">(Format .png)</span>
                                 </span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Senarai Butiran (Kanan - 7 Columns) -->
-                <div class="lg:col-span-7 flex flex-col justify-center">
-                    <div class="bg-white/80 backdrop-blur-2xl p-6 sm:p-10 rounded-[3rem] border-2 border-white shadow-[0_15px_40px_rgba(0,0,0,0.08),inset_0_4px_20px_rgba(255,255,255,1)] relative overflow-hidden group/card transition-all duration-500 hover:shadow-[0_20px_50px_rgba(99,102,241,0.12)]">
+                <!-- Senarai Butiran (Bawah - Dipusatkan) -->
+                <div class="w-full max-w-5xl mx-auto flex flex-col justify-center">
+                    <div class="bg-white/80 backdrop-blur-2xl p-6 sm:p-12 rounded-[3rem] border-2 border-white shadow-[0_15px_40px_rgba(0,0,0,0.08),inset_0_4px_20px_rgba(255,255,255,1)] relative overflow-hidden group/card transition-all duration-500 hover:shadow-[0_20px_50px_rgba(99,102,241,0.12)]">
                         
                         <div class="absolute inset-0 bg-gradient-to-br from-indigo-50/40 to-purple-50/40 opacity-0 group-hover/card:opacity-100 transition-opacity duration-700"></div>
 
-                        <h3 class="text-2xl sm:text-3xl font-heading font-black mb-6 sm:mb-8 pb-4 border-b-2 border-gray-200/80 relative z-10 flex items-center gap-3">
+                        <h3 class="text-2xl sm:text-3xl font-heading font-black mb-6 sm:mb-10 pb-5 border-b-2 border-gray-200/80 relative z-10 flex items-center gap-3">
                             <span class="text-3xl sm:text-4xl drop-shadow-md">📋</span> <span class="text-gray-800">Profil E-Modul</span>
                         </h3>
 
-                        <div class="space-y-4 sm:space-y-5 relative z-10">
+                        <div class="space-y-6 sm:space-y-8 relative z-10">
                             
-                            <div class="flex items-center gap-4 sm:gap-6 group">
-                                <div class="relative w-12 h-12 flex items-center justify-center flex-shrink-0">
-                                    <div class="text-3xl sm:text-4xl drop-shadow-md maklumat-bounce delay-b-1 relative z-10 transform-gpu">🧵</div>
-                                    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-1.5 bg-black/15 rounded-[100%] maklumat-shadow-pulse delay-b-1 blur-[2px] transition-all"></div>
+                            <div class="flex items-center gap-5 sm:gap-8 group">
+                                <div class="relative w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center flex-shrink-0">
+                                    <div class="text-4xl sm:text-5xl drop-shadow-md maklumat-bounce delay-b-1 relative z-10 transform-gpu">🧵</div>
+                                    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-10 h-2 bg-black/15 rounded-[100%] maklumat-shadow-pulse delay-b-1 blur-[2px] transition-all"></div>
                                 </div>
-                                <div class="flex-grow border-b border-gray-100 pb-3">
-                                    <p class="text-[10px] sm:text-xs font-bold tracking-widest text-[#1E3A8A] uppercase mb-0.5">Nama Modul</p>
-                                    <p class="text-2xl sm:text-3xl font-heading font-black text-gradient drop-shadow-sm tracking-tight leading-none">StitchLab</p>
-                                </div>
-                            </div>
-
-                            <div class="flex items-center gap-4 sm:gap-6 group">
-                                <div class="relative w-12 h-12 flex items-center justify-center flex-shrink-0">
-                                    <div class="text-3xl sm:text-4xl drop-shadow-md maklumat-bounce delay-b-2 relative z-10 transform-gpu">📖</div>
-                                    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-1.5 bg-black/15 rounded-[100%] maklumat-shadow-pulse delay-b-2 blur-[2px] transition-all"></div>
-                                </div>
-                                <div class="flex-grow border-b border-gray-100 pb-3">
-                                    <p class="text-[10px] sm:text-xs font-bold tracking-widest text-[#1E3A8A] uppercase mb-0.5">Mata Pelajaran</p>
-                                    <p class="text-base sm:text-lg font-bold text-[#64748B] leading-tight">Asas Jahitan Pendidikan Khas Tingkatan 1</p>
+                                <div class="flex-grow border-b border-gray-100 pb-4">
+                                    <p class="text-xs sm:text-sm font-bold tracking-widest text-[#1E3A8A] uppercase mb-1">Nama Modul</p>
+                                    <p class="text-3xl sm:text-4xl font-heading font-black text-gradient drop-shadow-sm tracking-tight leading-none">StitchLab</p>
                                 </div>
                             </div>
 
-                            <div class="flex items-center gap-4 sm:gap-6 group">
-                                <div class="relative w-12 h-12 flex items-center justify-center flex-shrink-0">
-                                    <div class="text-3xl sm:text-4xl drop-shadow-md maklumat-bounce delay-b-3 relative z-10 transform-gpu">🎯</div>
-                                    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-1.5 bg-black/15 rounded-[100%] maklumat-shadow-pulse delay-b-3 blur-[2px] transition-all"></div>
+                            <div class="flex items-center gap-5 sm:gap-8 group">
+                                <div class="relative w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center flex-shrink-0">
+                                    <div class="text-4xl sm:text-5xl drop-shadow-md maklumat-bounce delay-b-2 relative z-10 transform-gpu">📖</div>
+                                    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-10 h-2 bg-black/15 rounded-[100%] maklumat-shadow-pulse delay-b-2 blur-[2px] transition-all"></div>
                                 </div>
-                                <div class="flex-grow border-b border-gray-100 pb-3">
-                                    <p class="text-[10px] sm:text-xs font-bold tracking-widest text-[#B91C1C] uppercase mb-0.5">Topik</p>
-                                    <p class="text-base sm:text-lg font-bold text-[#64748B] leading-tight">Menjahit Jahitan Asas</p>
-                                </div>
-                            </div>
-
-                            <div class="flex items-center gap-4 sm:gap-6 group">
-                                <div class="relative w-12 h-12 flex items-center justify-center flex-shrink-0">
-                                    <div class="text-3xl sm:text-4xl drop-shadow-md maklumat-bounce delay-b-4 relative z-10 transform-gpu">💻</div>
-                                    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-1.5 bg-black/15 rounded-[100%] maklumat-shadow-pulse delay-b-4 blur-[2px] transition-all"></div>
-                                </div>
-                                <div class="flex-grow border-b border-gray-100 pb-3">
-                                    <p class="text-[10px] sm:text-xs font-bold tracking-widest text-[#047857] uppercase mb-0.5">Pembangun Modul</p>
-                                    <p class="text-base sm:text-lg font-bold text-[#64748B] leading-tight">Suhayl Adzim Bin Agus Supandi</p>
+                                <div class="flex-grow border-b border-gray-100 pb-4">
+                                    <p class="text-xs sm:text-sm font-bold tracking-widest text-[#1E3A8A] uppercase mb-1">Mata Pelajaran</p>
+                                    <p class="text-lg sm:text-xl font-bold text-[#64748B] leading-tight">Asas Jahitan Pendidikan Khas Tingkatan 1</p>
                                 </div>
                             </div>
 
-                            <div class="flex items-center gap-4 sm:gap-6 group">
-                                <div class="relative w-12 h-12 flex items-center justify-center flex-shrink-0">
-                                    <div class="text-3xl sm:text-4xl drop-shadow-md maklumat-bounce delay-b-5 relative z-10 transform-gpu">🎓</div>
-                                    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-1.5 bg-black/15 rounded-[100%] maklumat-shadow-pulse delay-b-5 blur-[2px] transition-all"></div>
+                            <div class="flex items-center gap-5 sm:gap-8 group">
+                                <div class="relative w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center flex-shrink-0">
+                                    <div class="text-4xl sm:text-5xl drop-shadow-md maklumat-bounce delay-b-3 relative z-10 transform-gpu">🎯</div>
+                                    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-10 h-2 bg-black/15 rounded-[100%] maklumat-shadow-pulse delay-b-3 blur-[2px] transition-all"></div>
                                 </div>
-                                <div class="flex-grow border-b border-gray-100 pb-3">
-                                    <p class="text-[10px] sm:text-xs font-bold tracking-widest text-[#B45309] uppercase mb-0.5">Pensyarah Penyelia</p>
-                                    <p class="text-base sm:text-lg font-bold text-[#64748B] leading-tight">Prof. Madya Dr. Mohamed Nor Azhari Bin Azman</p>
-                                </div>
-                            </div>
-
-                            <div class="flex items-center gap-4 sm:gap-6 group">
-                                <div class="relative w-12 h-12 flex items-center justify-center flex-shrink-0">
-                                    <div class="text-3xl sm:text-4xl drop-shadow-md maklumat-bounce delay-b-6 relative z-10 transform-gpu">🏫</div>
-                                    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-1.5 bg-black/15 rounded-[100%] maklumat-shadow-pulse delay-b-6 blur-[2px] transition-all"></div>
-                                </div>
-                                <div class="flex-grow pb-1">
-                                    <p class="text-[10px] sm:text-xs font-bold tracking-widest text-[#4338CA] uppercase mb-0.5">Institusi</p>
-                                    <p class="text-base sm:text-lg font-bold text-[#64748B] leading-tight">Universiti Pendidikan Sultan Idris</p>
+                                <div class="flex-grow border-b border-gray-100 pb-4">
+                                    <p class="text-xs sm:text-sm font-bold tracking-widest text-[#B91C1C] uppercase mb-1">Topik</p>
+                                    <p class="text-lg sm:text-xl font-bold text-[#64748B] leading-tight">Menjahit Jahitan Asas</p>
                                 </div>
                             </div>
 
-                            <div class="pt-3">
-                                <div class="flex items-start gap-4 sm:gap-5 group bg-indigo-50/50 p-4 sm:p-5 rounded-2xl border border-indigo-100/60 hover:bg-indigo-50 transition-colors duration-300">
-                                    <div class="relative w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center flex-shrink-0 mt-1">
-                                        <div class="text-3xl sm:text-4xl drop-shadow-md maklumat-bounce delay-b-7 relative z-10 transform-gpu">📝</div>
-                                        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-1.5 bg-black/15 rounded-[100%] maklumat-shadow-pulse delay-b-7 blur-[2px] transition-all"></div>
+                            <div class="flex items-center gap-5 sm:gap-8 group">
+                                <div class="relative w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center flex-shrink-0">
+                                    <div class="text-4xl sm:text-5xl drop-shadow-md maklumat-bounce delay-b-4 relative z-10 transform-gpu">💻</div>
+                                    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-10 h-2 bg-black/15 rounded-[100%] maklumat-shadow-pulse delay-b-4 blur-[2px] transition-all"></div>
+                                </div>
+                                <div class="flex-grow border-b border-gray-100 pb-4">
+                                    <p class="text-xs sm:text-sm font-bold tracking-widest text-[#047857] uppercase mb-1">Pembangun Modul</p>
+                                    <p class="text-lg sm:text-xl font-bold text-[#64748B] leading-tight">Suhayl Adzim Bin Agus Supandi</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-5 sm:gap-8 group">
+                                <div class="relative w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center flex-shrink-0">
+                                    <div class="text-4xl sm:text-5xl drop-shadow-md maklumat-bounce delay-b-5 relative z-10 transform-gpu">🎓</div>
+                                    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-10 h-2 bg-black/15 rounded-[100%] maklumat-shadow-pulse delay-b-5 blur-[2px] transition-all"></div>
+                                </div>
+                                <div class="flex-grow border-b border-gray-100 pb-4">
+                                    <p class="text-xs sm:text-sm font-bold tracking-widest text-[#B45309] uppercase mb-1">Pensyarah Penyelia</p>
+                                    <p class="text-lg sm:text-xl font-bold text-[#64748B] leading-tight">Prof. Madya Dr. Mohamed Nor Azhari Bin Azman</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-5 sm:gap-8 group">
+                                <div class="relative w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center flex-shrink-0">
+                                    <div class="text-4xl sm:text-5xl drop-shadow-md maklumat-bounce delay-b-6 relative z-10 transform-gpu">🏫</div>
+                                    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-10 h-2 bg-black/15 rounded-[100%] maklumat-shadow-pulse delay-b-6 blur-[2px] transition-all"></div>
+                                </div>
+                                <div class="flex-grow pb-2">
+                                    <p class="text-xs sm:text-sm font-bold tracking-widest text-[#4338CA] uppercase mb-1">Institusi</p>
+                                    <p class="text-lg sm:text-xl font-bold text-[#64748B] leading-tight">Universiti Pendidikan Sultan Idris</p>
+                                </div>
+                            </div>
+
+                            <div class="pt-4">
+                                <div class="flex items-start gap-5 sm:gap-6 group bg-indigo-50/50 p-6 sm:p-8 rounded-[2rem] border border-indigo-100/60 hover:bg-indigo-50 transition-colors duration-300">
+                                    <div class="relative w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center flex-shrink-0 mt-1">
+                                        <div class="text-4xl sm:text-5xl drop-shadow-md maklumat-bounce delay-b-7 relative z-10 transform-gpu">📝</div>
+                                        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-10 h-2 bg-black/15 rounded-[100%] maklumat-shadow-pulse delay-b-7 blur-[2px] transition-all"></div>
                                     </div>
                                     <div>
-                                        <p class="text-[10px] sm:text-xs font-bold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 uppercase mb-1.5">Tajuk Kajian</p>
-                                        <p class="text-sm sm:text-base font-bold text-[#1E3A8A] leading-relaxed italic">
+                                        <p class="text-xs sm:text-sm font-bold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 uppercase mb-2">Tajuk Kajian</p>
+                                        <p class="text-base sm:text-lg font-bold text-[#1E3A8A] leading-relaxed italic">
                                             "Pembangunan dan Kebolehgunaan E-Modul Asas Jahitan Berasaskan Universal Design for Learning (UDL) bagi Pelajar Pendidikan Khas Berkefungsian Tinggi di Sekolah Menengah"
                                         </p>
                                     </div>
