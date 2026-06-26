@@ -257,6 +257,59 @@
             animation: floatSubtle 5s ease-in-out infinite;
         }
 
+        /* ==========================================
+           VIDEO POPUP STYLES
+        ========================================== */
+        #video-modal {
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s 0.3s, opacity 0.3s ease;
+        }
+
+        #video-modal.active {
+            visibility: visible;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .video-backdrop {
+            background-color: rgba(0, 0, 0, 0.80);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .video-content {
+            width: 95%; /* Telefon */
+            max-width: 1000px;
+            aspect-ratio: 16 / 9;
+            border-radius: 20px;
+            transform: scale(0.95);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        @media (min-width: 640px) {
+            .video-content { width: 92%; } /* Tablet */
+        }
+
+        @media (min-width: 768px) {
+            .video-content { width: 90%; } /* Desktop */
+        }
+
+        #video-modal.active .video-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .video-close-btn {
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: all 0.2s ease;
+        }
+        .video-close-btn:hover {
+            transform: scale(1.1);
+            background-color: #f3f4f6;
+        }
+
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-track { background: transparent; }
@@ -341,7 +394,7 @@
                         E-Modul interaktif direka khas untuk memudahkan pembelajaran asas jahitan secara visual dan praktikal. Sesuai untuk pelajar yang ingin mempelajari kemahiran hidup.
                     </p>
                     <div class="flex flex-wrap gap-4 pt-2">
-                        <button onclick="document.getElementById('stesen-pembelajaran').scrollIntoView({behavior: 'smooth'})" class="group inline-flex items-center justify-center px-8 py-4 text-lg font-heading font-semibold text-white transition-all duration-300 bg-gradient-to-r from-purple-600 to-pink-500 rounded-full hover:from-purple-500 hover:to-pink-400 hover:shadow-xl hover:shadow-pink-500/40 hover:-translate-y-2 hover:scale-105 active:scale-95">
+                        <button onclick="document.getElementById('stesen-pembelajaran').scrollIntoView({behavior: 'smooth'})" class="group inline-flex items-center justify-center px-8 py-4 text-lg font-heading font-semibold text-white transition-all duration-150 bg-gradient-to-r from-purple-600 to-pink-500 rounded-full shadow-[0_8px_0_#831843] hover:shadow-[0_6px_0_#831843] hover:translate-y-[2px] active:shadow-[0_0px_0_#831843] active:translate-y-[8px]">
                             Mulakan Belajar
                             <i data-lucide="arrow-right" class="ml-2 h-5 w-5 transform group-hover:translate-x-1 transition-transform"></i>
                         </button>
@@ -831,6 +884,17 @@
                     </div>
 
                 </div>
+
+                <!-- Navigasi Bawah: Alatan Bahan -->
+                <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mt-16 pt-8 border-t border-gray-200/50 max-w-7xl mx-auto w-full px-4 sm:px-6">
+                    <button onclick="switchTab('utama')" class="px-8 py-4 rounded-full bg-gradient-to-r from-rose-500 to-pink-600 text-white font-heading font-semibold transition-all duration-150 shadow-[0_6px_0_#881337] hover:shadow-[0_4px_0_#881337] hover:translate-y-[2px] active:shadow-[0_0px_0_#881337] active:translate-y-[6px] flex items-center gap-2 w-full sm:w-auto justify-center group">
+                        <i data-lucide="arrow-left" class="w-5 h-5 transform group-hover:-translate-x-1 transition-transform"></i> Kembali
+                    </button>
+                    <button onclick="openJenisMata('main')" class="px-8 py-4 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-heading font-semibold hover:from-indigo-600 hover:to-purple-700 transition-all duration-150 shadow-[0_6px_0_#312e81] hover:shadow-[0_4px_0_#312e81] hover:translate-y-[2px] active:shadow-[0_0px_0_#312e81] active:translate-y-[6px] flex items-center gap-2 w-full sm:w-auto justify-center group">
+                        Seterusnya <i data-lucide="arrow-right" class="w-5 h-5 transform group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                </div>
+
             </div>
         </div>
 
@@ -849,38 +913,36 @@
                     </p>
                 </div>
 
-                <div class="grid md:grid-cols-3 gap-10 lg:gap-12 max-w-6xl mx-auto px-4 sm:px-6">
+                <!-- Dilebarkan ke max-w-[85rem] supaya kad lebih lebar pada desktop -->
+                <div class="grid md:grid-cols-3 gap-10 lg:gap-12 max-w-[85rem] mx-auto px-4 sm:px-6">
                     <!-- Kategori 1: Sementara -->
                     <div class="premium-border-card shimmer-sweep p-8 sm:p-10 flex flex-col items-center text-center relative group shadow-[0_15px_30px_rgba(0,0,0,0.03)] transition-all duration-500">
                         <div class="premium-border-glow"></div>
                         
-                        <!-- Soft Glow & Gradient Border Container for Premium SVG Graphic -->
+                        <!-- Soft Glow & Gradient Border Container for PNG Graphic -->
                         <div class="relative w-40 h-40 mb-10 rounded-[2.5rem] p-1 group-hover:scale-105 transition-all duration-500 animate-float-subtle">
                             <!-- Soft Glow Output -->
                             <div class="absolute inset-0 rounded-[2.5rem] bg-gradient-flow opacity-30 group-hover:opacity-70 blur-[15px] transition-all duration-500"></div>
                             <!-- Moving Gradient Border Flow -->
                             <div class="absolute inset-0 rounded-[2.5rem] bg-gradient-flow opacity-40 group-hover:opacity-100 transition-all duration-500"></div>
                             
-                            <!-- Inner Box with Soft Background Gradient and Vector -->
+                            <!-- Inner Box with Soft Background Gradient -->
                             <div class="relative w-full h-full bg-gradient-to-tr from-indigo-50/90 to-purple-50/90 backdrop-blur-xl rounded-[calc(2.5rem-5px)] flex items-center justify-center overflow-hidden border border-white/80 shadow-inner transition-all duration-500">
-                                <!-- Creative Vector representing Jahitan Sementara (Needle with dashed temporary stitch) -->
-                                <svg class="w-20 h-20 text-indigo-600 drop-shadow-[0_8px_12px_rgba(99,102,241,0.2)]" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M15 80C30 80 35 60 50 60C65 60 70 80 85 80" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-dasharray="10 10" />
-                                    <path d="M70 20L45 55" stroke="#EC4899" stroke-width="5" stroke-linecap="round" />
-                                    <circle cx="70" cy="20" r="4" fill="#EC4899" />
-                                    <circle cx="45" cy="55" r="3" fill="#EC4899" />
-                                    <path d="M25 55L30 35" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-dasharray="4 4" />
-                                </svg>
+                                <!-- Tag Gambar PNG (Sila gantikan src dengan fail anda) -->
+                                <img src="gambar_sementara.png" alt="Jahitan Sementara" class="absolute inset-0 w-full h-full object-contain p-5 drop-shadow-md z-10 transition-transform duration-500" onerror="this.style.display='none'">
+                                <!-- Teks ganti sementara jika gambar belum di-upload -->
+                                <span class="text-xs font-bold text-indigo-400 opacity-50 z-0">Gambar .PNG</span>
                             </div>
                         </div>
 
                         <h3 class="text-2xl font-heading font-black text-[#1E2A44] mb-3 tracking-[-0.5px] leading-tight">Jahitan Sementara</h3>
-                        <p class="font-sans font-medium text-sm text-[#6B7280] leading-[1.6] mb-8 px-2 max-h-[2.8rem] line-clamp-2">
+                        <!-- line-clamp-2 dibuang supaya teks penuh kelihatan -->
+                        <p class="font-sans font-medium text-sm text-[#6B7280] leading-relaxed mb-10 px-2">
                             Pelajari jahitan asas sebagai persediaan sebelum jahitan kekal.
                         </p>
                         
-                        <!-- Premium Capsule Button -->
-                        <button onclick="openJenisMata('detail', 'sementara')" class="mt-auto w-full h-[52px] bg-gradient-to-r from-[#7C3AED] to-[#EC4899] hover:from-[#8B5CF6] hover:to-[#f472b6] relative overflow-hidden rounded-full transition-all duration-300 shadow-md hover:shadow-[0_10px_25px_rgba(139,92,246,0.3)] hover:scale-[1.02] flex items-center justify-center gap-2 group/btn active:scale-95">
+                        <!-- Premium 3D Capsule Button -->
+                        <button onclick="openJenisMata('detail', 'sementara')" class="mt-auto w-full h-[52px] bg-gradient-to-r from-[#7C3AED] to-[#EC4899] rounded-full transition-all duration-150 shadow-[0_6px_0_#5b21b6] hover:shadow-[0_4px_0_#5b21b6] hover:translate-y-[2px] active:shadow-[0_0px_0_#5b21b6] active:translate-y-[6px] flex items-center justify-center gap-2 group/btn">
                             <span class="font-heading font-semibold text-white tracking-wide text-sm">Mula Pembelajaran</span>
                             <i data-lucide="arrow-right" class="w-4 h-4 text-white transform group-hover/btn:translate-x-1.5 transition-transform duration-300"></i>
                         </button>
@@ -890,31 +952,25 @@
                     <div class="premium-border-card shimmer-sweep p-8 sm:p-10 flex flex-col items-center text-center relative group shadow-[0_15px_30px_rgba(0,0,0,0.03)] transition-all duration-500">
                         <div class="premium-border-glow"></div>
                         
-                        <!-- Soft Glow & Gradient Border Container for Premium SVG Graphic -->
+                        <!-- Soft Glow & Gradient Border Container for PNG Graphic -->
                         <div class="relative w-40 h-40 mb-10 rounded-[2.5rem] p-1 group-hover:scale-105 transition-all duration-500 animate-float-subtle" style="animation-delay: 1.5s;">
-                            <!-- Soft Glow Output -->
                             <div class="absolute inset-0 rounded-[2.5rem] bg-gradient-flow opacity-30 group-hover:opacity-70 blur-[15px] transition-all duration-500"></div>
-                            <!-- Moving Gradient Border Flow -->
                             <div class="absolute inset-0 rounded-[2.5rem] bg-gradient-flow opacity-40 group-hover:opacity-100 transition-all duration-500"></div>
                             
-                            <!-- Inner Box with Soft Background Gradient and Vector -->
                             <div class="relative w-full h-full bg-gradient-to-tr from-pink-50/90 to-rose-50/90 backdrop-blur-xl rounded-[calc(2.5rem-5px)] flex items-center justify-center overflow-hidden border border-white/80 shadow-inner transition-all duration-500">
-                                <!-- Creative Vector representing Jahitan Penyambung (Connected interlocking strong loops) -->
-                                <svg class="w-20 h-20 text-rose-500 drop-shadow-[0_8px_12px_rgba(244,63,94,0.2)]" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M20 50C30 50 35 30 50 30C65 30 70 50 80 50" stroke="currentColor" stroke-width="5" stroke-linecap="round" />
-                                    <path d="M20 70C30 70 35 50 50 50C65 50 70 70 80 70" stroke="#7C3AED" stroke-width="5" stroke-linecap="round" />
-                                    <line x1="50" y1="20" x2="50" y2="80" stroke="#EC4899" stroke-width="3" stroke-dasharray="6 6" />
-                                </svg>
+                                <!-- Tag Gambar PNG (Sila gantikan src dengan fail anda) -->
+                                <img src="gambar_penyambung.png" alt="Jahitan Penyambung" class="absolute inset-0 w-full h-full object-contain p-5 drop-shadow-md z-10 transition-transform duration-500" onerror="this.style.display='none'">
+                                <span class="text-xs font-bold text-pink-400 opacity-50 z-0">Gambar .PNG</span>
                             </div>
                         </div>
 
                         <h3 class="text-2xl font-heading font-black text-[#1E2A44] mb-3 tracking-[-0.5px] leading-tight">Jahitan Penyambung</h3>
-                        <p class="font-sans font-medium text-sm text-[#6B7280] leading-[1.6] mb-8 px-2 max-h-[2.8rem] line-clamp-2">
+                        <p class="font-sans font-medium text-sm text-[#6B7280] leading-relaxed mb-10 px-2">
                             Terokai jahitan yang digunakan untuk menyambungkan dua atau lebih kepingan fabrik.
                         </p>
                         
-                        <!-- Premium Capsule Button -->
-                        <button onclick="openJenisMata('detail', 'penyambung')" class="mt-auto w-full h-[52px] bg-gradient-to-r from-[#7C3AED] to-[#EC4899] hover:from-[#8B5CF6] hover:to-[#f472b6] relative overflow-hidden rounded-full transition-all duration-300 shadow-md hover:shadow-[0_10px_25px_rgba(139,92,246,0.3)] hover:scale-[1.02] flex items-center justify-center gap-2 group/btn active:scale-95">
+                        <!-- Premium 3D Capsule Button -->
+                        <button onclick="openJenisMata('detail', 'penyambung')" class="mt-auto w-full h-[52px] bg-gradient-to-r from-[#7C3AED] to-[#EC4899] rounded-full transition-all duration-150 shadow-[0_6px_0_#5b21b6] hover:shadow-[0_4px_0_#5b21b6] hover:translate-y-[2px] active:shadow-[0_0px_0_#5b21b6] active:translate-y-[6px] flex items-center justify-center gap-2 group/btn">
                             <span class="font-heading font-semibold text-white tracking-wide text-sm">Mula Pembelajaran</span>
                             <i data-lucide="arrow-right" class="w-4 h-4 text-white transform group-hover/btn:translate-x-1.5 transition-transform duration-300"></i>
                         </button>
@@ -924,38 +980,41 @@
                     <div class="premium-border-card shimmer-sweep p-8 sm:p-10 flex flex-col items-center text-center relative group shadow-[0_15px_30px_rgba(0,0,0,0.03)] transition-all duration-500">
                         <div class="premium-border-glow"></div>
                         
-                        <!-- Soft Glow & Gradient Border Container for Premium SVG Graphic -->
+                        <!-- Soft Glow & Gradient Border Container for PNG Graphic -->
                         <div class="relative w-40 h-40 mb-10 rounded-[2.5rem] p-1 group-hover:scale-105 transition-all duration-500 animate-float-subtle" style="animation-delay: 3s;">
-                            <!-- Soft Glow Output -->
                             <div class="absolute inset-0 rounded-[2.5rem] bg-gradient-flow opacity-30 group-hover:opacity-70 blur-[15px] transition-all duration-500"></div>
-                            <!-- Moving Gradient Border Flow -->
                             <div class="absolute inset-0 rounded-[2.5rem] bg-gradient-flow opacity-40 group-hover:opacity-100 transition-all duration-500"></div>
                             
-                            <!-- Inner Box with Soft Background Gradient and Vector -->
                             <div class="relative w-full h-full bg-gradient-to-tr from-emerald-50/90 to-teal-50/90 backdrop-blur-xl rounded-[calc(2.5rem-5px)] flex items-center justify-center overflow-hidden border border-white/80 shadow-inner transition-all duration-500">
-                                <!-- Creative Vector representing Jahitan Pengemas (Sleek overcasting loop/edge finish) -->
-                                <svg class="w-20 h-20 text-emerald-500 drop-shadow-[0_8px_12px_rgba(16,185,129,0.2)]" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M15 30H85V70H15V30Z" fill="#10B981" fill-opacity="0.1" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
-                                    <path d="M25 30V15H35L25 30Z" stroke="#EC4899" stroke-width="3" stroke-linejoin="round" />
-                                    <path d="M45 30V15H55L45 30Z" stroke="#EC4899" stroke-width="3" stroke-linejoin="round" />
-                                    <path d="M65 30V15H75L65 30Z" stroke="#EC4899" stroke-width="3" stroke-linejoin="round" />
-                                    <circle cx="50" cy="50" r="12" stroke="#7C3AED" stroke-width="4" stroke-dasharray="4 4" />
-                                </svg>
+                                <!-- Tag Gambar PNG (Sila gantikan src dengan fail anda) -->
+                                <img src="gambar_pengemas.png" alt="Jahitan Pengemas" class="absolute inset-0 w-full h-full object-contain p-5 drop-shadow-md z-10 transition-transform duration-500" onerror="this.style.display='none'">
+                                <span class="text-xs font-bold text-emerald-400 opacity-50 z-0">Gambar .PNG</span>
                             </div>
                         </div>
 
                         <h3 class="text-2xl font-heading font-black text-[#1E2A44] mb-3 tracking-[-0.5px] leading-tight">Jahitan Pengemas</h3>
-                        <p class="font-sans font-medium text-sm text-[#6B7280] leading-[1.6] mb-8 px-2 max-h-[2.8rem] line-clamp-2">
+                        <p class="font-sans font-medium text-sm text-[#6B7280] leading-relaxed mb-10 px-2">
                             Kenali jahitan yang menghasilkan kemasan tepi fabrik yang lebih kemas dan tahan lama.
                         </p>
                         
-                        <!-- Premium Capsule Button -->
-                        <button onclick="openJenisMata('detail', 'pengemas')" class="mt-auto w-full h-[52px] bg-gradient-to-r from-[#7C3AED] to-[#EC4899] hover:from-[#8B5CF6] hover:to-[#f472b6] relative overflow-hidden rounded-full transition-all duration-300 shadow-md hover:shadow-[0_10px_25px_rgba(139,92,246,0.3)] hover:scale-[1.02] flex items-center justify-center gap-2 group/btn active:scale-95">
+                        <!-- Premium 3D Capsule Button -->
+                        <button onclick="openJenisMata('detail', 'pengemas')" class="mt-auto w-full h-[52px] bg-gradient-to-r from-[#7C3AED] to-[#EC4899] rounded-full transition-all duration-150 shadow-[0_6px_0_#5b21b6] hover:shadow-[0_4px_0_#5b21b6] hover:translate-y-[2px] active:shadow-[0_0px_0_#5b21b6] active:translate-y-[6px] flex items-center justify-center gap-2 group/btn">
                             <span class="font-heading font-semibold text-white tracking-wide text-sm">Mula Pembelajaran</span>
                             <i data-lucide="arrow-right" class="w-4 h-4 text-white transform group-hover/btn:translate-x-1.5 transition-transform duration-300"></i>
                         </button>
                     </div>
                 </div>
+
+                <!-- Navigasi Bawah: Jenis Mata Jahitan -->
+                <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mt-16 pt-8 border-t border-gray-200/50 max-w-[85rem] mx-auto w-full px-4 sm:px-6">
+                    <button onclick="switchTab('alatan-bahan')" class="px-8 py-4 rounded-full bg-gradient-to-r from-rose-500 to-pink-600 text-white font-heading font-semibold transition-all duration-150 shadow-[0_6px_0_#881337] hover:shadow-[0_4px_0_#881337] hover:translate-y-[2px] active:shadow-[0_0px_0_#881337] active:translate-y-[6px] flex items-center gap-2 w-full sm:w-auto justify-center group">
+                        <i data-lucide="arrow-left" class="w-5 h-5 transform group-hover:-translate-x-1 transition-transform"></i> Kembali
+                    </button>
+                    <button onclick="switchTab('kuiz')" class="px-8 py-4 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-heading font-semibold hover:from-indigo-600 hover:to-purple-700 transition-all duration-150 shadow-[0_6px_0_#312e81] hover:shadow-[0_4px_0_#312e81] hover:translate-y-[2px] active:shadow-[0_0px_0_#312e81] active:translate-y-[6px] flex items-center gap-2 w-full sm:w-auto justify-center group">
+                        Seterusnya <i data-lucide="arrow-right" class="w-5 h-5 transform group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                </div>
+
             </div>
 
 
@@ -963,20 +1022,18 @@
             
             <!-- Detail Sementara -->
             <div id="jm-detail-sementara" class="hidden fade-in-el pt-8">
-                <button onclick="openJenisMata('main')" class="mb-8 flex items-center gap-2 text-gray-500 hover:text-indigo-600 font-heading font-semibold px-4 py-2 bg-white/50 rounded-full hover:bg-white shadow-sm transition"><i data-lucide="arrow-left" class="w-4 h-4"></i> Kembali ke Menu Utama</button>
-                
                 <div class="text-center mb-16">
                     <h2 class="text-5xl font-heading font-black text-gradient mb-4">Jahitan Sementara</h2>
-                    <p class="text-xl font-medium text-gray-700 max-w-2xl mx-auto">Digunakan untuk menetapkan kedudukan fabrik sebelum jahitan kekal dibuat.</p>
+                    <p class="text-xl font-sans font-medium text-gray-700 max-w-2xl mx-auto">Digunakan untuk menetapkan kedudukan fabrik sebelum jahitan kekal dibuat.</p>
                 </div>
 
                 <div class="grid md:grid-cols-2 gap-8 mb-16">
                     <!-- Jelujur Kasar -->
                     <div class="glass-card p-6 flex flex-col hover:border-blue-300 transition">
                         <div class="media-container aspect-[4/3] mb-6 shadow-sm">
-                            <img src="https://images.unsplash.com/photo-1584031633519-74d326462eb6?auto=format&fit=crop&q=80" alt="Jelujur Kasar">
+                            <img src="kasar.png" alt="Jelujur Kasar">
                         </div>
-                        <h3 class="text-3xl font-heading font-bold mb-4 text-gray-900">1. Jelujur Kasar</h3>
+                        <h3 class="text-3xl font-heading font-bold mb-4 text-gray-900">Jelujur Kasar</h3>
                         <div class="bg-blue-50/50 rounded-2xl p-6 border border-blue-100 flex-grow">
                             <h4 class="font-bold text-blue-700 mb-3 flex items-center text-sm uppercase tracking-wider"><i data-lucide="zap" class="w-4 h-4 mr-2"></i> Fungsi Utama</h4>
                             <ul class="space-y-3 text-gray-700 font-medium">
@@ -988,9 +1045,9 @@
                     <!-- Jelujur Panjang Pendek -->
                     <div class="glass-card p-6 flex flex-col hover:border-blue-300 transition">
                         <div class="media-container aspect-[4/3] mb-6 shadow-sm">
-                            <img src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?auto=format&fit=crop&q=80" alt="Jelujur Panjang Pendek">
+                            <img src="pendek.png" alt="Jelujur Panjang Pendek">
                         </div>
-                        <h3 class="text-3xl font-heading font-bold mb-4 text-gray-900">2. Jelujur Panjang Pendek</h3>
+                        <h3 class="text-3xl font-heading font-bold mb-4 text-gray-900">Jelujur Panjang Pendek</h3>
                         <div class="bg-blue-50/50 rounded-2xl p-6 border border-blue-100 flex-grow">
                             <h4 class="font-bold text-blue-700 mb-3 flex items-center text-sm uppercase tracking-wider"><i data-lucide="zap" class="w-4 h-4 mr-2"></i> Fungsi Utama</h4>
                             <ul class="space-y-3 text-gray-700 font-medium">
@@ -1001,10 +1058,10 @@
                     </div>
                 </div>
 
-                <!-- CALL TO ACTION -->
-                <div class="text-center py-10 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-[2rem] border border-blue-100 shadow-sm max-w-4xl mx-auto">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-6">Bersedia untuk belajar menjahit?</h3>
-                    <button onclick="openJenisMata('video', 'sementara')" class="inline-flex items-center justify-center px-10 py-5 text-xl font-heading font-semibold text-white transition-all duration-300 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full hover:shadow-[0_15px_30px_rgba(59,130,246,0.4)] hover:-translate-y-2 group">
+                <!-- CALL TO ACTION (3D Button) -->
+                <div class="text-center py-10 max-w-4xl mx-auto">
+                    <h3 class="text-3xl font-heading font-black bg-gradient-to-r from-blue-600 to-indigo-600 text-transparent bg-clip-text drop-shadow-sm mb-6">Jom belajar menjahit !</h3>
+                    <button onclick="openJenisMata('video', 'sementara')" class="inline-flex items-center justify-center px-10 py-5 text-xl font-heading font-semibold text-white transition-all duration-150 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full shadow-[0_8px_0_#312e81] hover:shadow-[0_6px_0_#312e81] hover:translate-y-[2px] active:shadow-[0_0px_0_#312e81] active:translate-y-[8px] group">
                         <span class="text-2xl mr-3">🎥</span> TONTON VIDEO JAHITAN
                         <i data-lucide="arrow-right" class="ml-3 group-hover:translate-x-2 transition-transform"></i>
                     </button>
@@ -1013,16 +1070,15 @@
 
             <!-- Detail Penyambung -->
             <div id="jm-detail-penyambung" class="hidden fade-in-el pt-8">
-                <button onclick="openJenisMata('main')" class="mb-8 flex items-center gap-2 text-gray-500 hover:text-rose-600 font-heading font-semibold px-4 py-2 bg-white/50 rounded-full hover:bg-white shadow-sm transition"><i data-lucide="arrow-left" class="w-4 h-4"></i> Kembali ke Menu Utama</button>
                 <div class="text-center mb-16">
                     <h2 class="text-5xl font-heading font-black text-gradient mb-4">Jahitan Penyambung</h2>
-                    <p class="text-xl font-medium text-gray-700 max-w-2xl mx-auto">Berfungsi untuk menyambungkan dua atau lebih kepingan fabrik agar bercantum kukuh.</p>
+                    <p class="text-xl font-sans font-medium text-gray-700 max-w-2xl mx-auto">Berfungsi untuk menyambungkan dua atau lebih kepingan fabrik agar bercantum kukuh.</p>
                 </div>
                 <div class="grid md:grid-cols-3 gap-6 mb-16">
                     <!-- Kia -->
                     <div class="glass-card p-6 flex flex-col hover:border-rose-300 transition">
-                        <div class="media-container aspect-square mb-6 shadow-sm"><img src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?auto=format&fit=crop&q=80"></div>
-                        <h3 class="text-2xl font-heading font-bold mb-4 text-gray-900">1. Jahitan Kia</h3>
+                        <div class="media-container aspect-square mb-6 shadow-sm"><img src="kia.png" alt="Jahitan Kia"></div>
+                        <h3 class="text-2xl font-heading font-bold mb-4 text-gray-900">Jahitan Kia</h3>
                         <div class="bg-rose-50/50 rounded-2xl p-5 border border-rose-100 flex-grow text-sm">
                             <h4 class="font-bold text-rose-700 mb-2">FUNGSI :</h4>
                             <ul class="space-y-2 text-gray-700 list-disc list-inside marker:text-rose-400 font-medium">
@@ -1034,8 +1090,8 @@
                     </div>
                     <!-- Halus -->
                     <div class="glass-card p-6 flex flex-col hover:border-rose-300 transition">
-                        <div class="media-container aspect-square mb-6 shadow-sm"><img src="https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?auto=format&fit=crop&q=80"></div>
-                        <h3 class="text-2xl font-heading font-bold mb-4 text-gray-900">2. Jahitan Halus</h3>
+                        <div class="media-container aspect-square mb-6 shadow-sm"><img src="halus.png" alt="Jahitan Halus"></div>
+                        <h3 class="text-2xl font-heading font-bold mb-4 text-gray-900">Jahitan Halus</h3>
                         <div class="bg-rose-50/50 rounded-2xl p-5 border border-rose-100 flex-grow text-sm">
                             <h4 class="font-bold text-rose-700 mb-2">FUNGSI :</h4>
                             <ul class="space-y-2 text-gray-700 list-disc list-inside marker:text-rose-400 font-medium">
@@ -1047,8 +1103,8 @@
                     </div>
                     <!-- Mesin -->
                     <div class="glass-card p-6 flex flex-col hover:border-rose-300 transition">
-                        <div class="media-container aspect-square mb-6 shadow-sm"><img src="https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?auto=format&fit=crop&q=80"></div>
-                        <h3 class="text-2xl font-heading font-bold mb-4 text-gray-900">3. Jahitan Mesin</h3>
+                        <div class="media-container aspect-square mb-6 shadow-sm"><img src="mesin.png" alt="Jahitan Mesin"></div>
+                        <h3 class="text-2xl font-heading font-bold mb-4 text-gray-900">Jahitan Mesin</h3>
                         <div class="bg-rose-50/50 rounded-2xl p-5 border border-rose-100 flex-grow text-sm">
                             <h4 class="font-bold text-rose-700 mb-2">FUNGSI :</h4>
                             <ul class="space-y-2 text-gray-700 list-disc list-inside marker:text-rose-400 font-medium">
@@ -1058,9 +1114,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="text-center py-10 bg-gradient-to-r from-rose-50 to-pink-50 rounded-[2rem] border border-rose-100 shadow-sm max-w-4xl mx-auto">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-6">Tonton cara sambung fabrik</h3>
-                    <button onclick="openJenisMata('video', 'penyambung')" class="inline-flex items-center justify-center px-10 py-5 text-xl font-heading font-semibold text-white transition-all duration-300 bg-gradient-to-r from-rose-500 to-pink-600 rounded-full hover:shadow-[0_15px_30px_rgba(244,63,94,0.4)] hover:-translate-y-2 group">
+                <!-- CALL TO ACTION (3D Button) -->
+                <div class="text-center py-10 max-w-4xl mx-auto">
+                    <h3 class="text-3xl font-heading font-black bg-gradient-to-r from-rose-500 to-pink-600 text-transparent bg-clip-text drop-shadow-sm mb-6">Jom belajar menjahit !</h3>
+                    <button onclick="openJenisMata('video', 'penyambung')" class="inline-flex items-center justify-center px-10 py-5 text-xl font-heading font-semibold text-white transition-all duration-150 bg-gradient-to-r from-rose-500 to-pink-600 rounded-full shadow-[0_8px_0_#881337] hover:shadow-[0_6px_0_#881337] hover:translate-y-[2px] active:shadow-[0_0px_0_#881337] active:translate-y-[8px] group">
                         <span class="text-2xl mr-3">🎥</span> TONTON VIDEO JAHITAN
                         <i data-lucide="arrow-right" class="ml-3 group-hover:translate-x-2 transition-transform"></i>
                     </button>
@@ -1069,33 +1126,39 @@
 
             <!-- Detail Pengemas -->
             <div id="jm-detail-pengemas" class="hidden fade-in-el pt-8">
-                <button onclick="openJenisMata('main')" class="mb-8 flex items-center gap-2 text-gray-500 hover:text-emerald-600 font-heading font-semibold px-4 py-2 bg-white/50 rounded-full hover:bg-white shadow-sm transition"><i data-lucide="arrow-left" class="w-4 h-4"></i> Kembali ke Menu Utama</button>
                 <div class="text-center mb-16">
                     <h2 class="text-5xl font-heading font-black text-gradient mb-4">Jahitan Pengemas</h2>
-                    <p class="text-xl font-medium text-gray-700 max-w-2xl mx-auto">Kemasan akhir bagi mengelakkan tepi kain daripada berbulu atau meretas.</p>
+                    <p class="text-xl font-sans font-medium text-gray-700 max-w-2xl mx-auto">Kemasan akhir bagi mengelakkan tepi kain daripada berbulu atau meretas.</p>
                 </div>
                 <div class="grid md:grid-cols-3 gap-6 mb-16">
                     <!-- Insang Pari -->
                     <div class="glass-card p-6 flex flex-col hover:border-emerald-300 transition">
-                        <div class="media-container aspect-video mb-6 shadow-sm"><img src="https://images.unsplash.com/photo-1610486001099-0d199846b412?auto=format&fit=crop&q=80"></div>
-                        <h3 class="text-2xl font-heading font-bold mb-4 text-gray-900">1. Insang Pari</h3>
+                        <div class="media-container aspect-square mb-6 shadow-sm"><img src="pari.png" alt="Insang Pari"></div>
+                        <h3 class="text-2xl font-heading font-bold mb-4 text-gray-900">Insang Pari</h3>
                         <div class="bg-emerald-50/50 rounded-2xl p-5 border border-emerald-100 flex-grow text-sm">
-                            <p class="text-gray-700 font-medium"><span class="font-bold text-emerald-700">Fungsi:</span> Mengemas tepi kain atau basi kain agar kelihatan rapi dan sebagai hiasan pinggir.</p>
+                            <h4 class="font-bold text-emerald-700 mb-2">FUNGSI :</h4>
+                            <p class="text-gray-700 font-medium">
+                                Mengemas tepi kain atau basi kain agar kelihatan rapi dan sebagai hiasan pinggir.
+                            </p>
                         </div>
                     </div>
                     <!-- Silang Pangkah -->
                     <div class="glass-card p-6 flex flex-col hover:border-emerald-300 transition">
-                        <div class="media-container aspect-video mb-6 shadow-sm"><img src="https://images.unsplash.com/photo-1544453816-562a26511a7c?auto=format&fit=crop&q=80"></div>
-                        <h3 class="text-2xl font-heading font-bold mb-4 text-gray-900">2. Silang Pangkah</h3>
+                        <div class="media-container aspect-square mb-6 shadow-sm"><img src="pangkah.png" alt="Silang Pangkah"></div>
+                        <h3 class="text-2xl font-heading font-bold mb-4 text-gray-900">Silang Pangkah</h3>
                         <div class="bg-emerald-50/50 rounded-2xl p-5 border border-emerald-100 flex-grow text-sm">
-                            <p class="text-gray-700 font-medium"><span class="font-bold text-emerald-700">Fungsi:</span> Menjahit kelepet, lapik, pita zip pada skirt/seluar, dan sesuai dijadikan corak sulaman.</p>
+                            <h4 class="font-bold text-emerald-700 mb-2">FUNGSI :</h4>
+                            <p class="text-gray-700 font-medium">
+                                Menjahit kelepet, lapik, pita zip pada skirt/seluar, dan sesuai dijadikan corak sulaman.
+                            </p>
                         </div>
                     </div>
                     <!-- Lilit Ubi -->
                     <div class="glass-card p-6 flex flex-col hover:border-emerald-300 transition">
-                        <div class="media-container aspect-video mb-6 shadow-sm"><img src="https://images.unsplash.com/photo-1598466633633-9111b058a9e6?auto=format&fit=crop&q=80"></div>
-                        <h3 class="text-2xl font-heading font-bold mb-4 text-gray-900">3. Lilit Ubi</h3>
+                        <div class="media-container aspect-square mb-6 shadow-sm"><img src="ubi.png" alt="Lilit Ubi"></div>
+                        <h3 class="text-2xl font-heading font-bold mb-4 text-gray-900">Lilit Ubi</h3>
                         <div class="bg-emerald-50/50 rounded-2xl p-5 border border-emerald-100 flex-grow text-sm">
+                            <h4 class="font-bold text-emerald-700 mb-2">FUNGSI :</h4>
                             <ul class="space-y-1 text-gray-700 list-disc list-inside marker:text-emerald-400 font-medium">
                                 <li>Mengemas guntingan tepi.</li>
                                 <li>Menjahit butang katup/cangkuk.</li>
@@ -1104,9 +1167,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="text-center py-10 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-[2rem] border border-emerald-100 shadow-sm max-w-4xl mx-auto">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-6">Pelajari cara buat kemasan</h3>
-                    <button onclick="openJenisMata('video', 'pengemas')" class="inline-flex items-center justify-center px-10 py-5 text-xl font-heading font-semibold text-white transition-all duration-300 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-full hover:shadow-[0_15px_30px_rgba(16,185,129,0.4)] hover:-translate-y-2 group">
+                <!-- CALL TO ACTION (3D Button) -->
+                <div class="text-center py-10 max-w-4xl mx-auto">
+                    <h3 class="text-3xl font-heading font-black bg-gradient-to-r from-emerald-500 to-teal-600 text-transparent bg-clip-text drop-shadow-sm mb-6">Jom belajar menjahit !</h3>
+                    <button onclick="openJenisMata('video', 'pengemas')" class="inline-flex items-center justify-center px-10 py-5 text-xl font-heading font-semibold text-white transition-all duration-150 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-full shadow-[0_8px_0_#064e3b] hover:shadow-[0_6px_0_#064e3b] hover:translate-y-[2px] active:shadow-[0_0px_0_#064e3b] active:translate-y-[8px] group">
                         <span class="text-2xl mr-3">🎥</span> TONTON VIDEO JAHITAN
                         <i data-lucide="arrow-right" class="ml-3 group-hover:translate-x-2 transition-transform"></i>
                     </button>
@@ -1120,14 +1184,14 @@
             <div id="jm-video-sementara" class="hidden fade-in-el pt-8 max-w-4xl mx-auto">
                 <div class="text-center mb-12">
                     <h1 class="text-4xl font-heading font-black text-gradient mb-4 uppercase tracking-wide">LANGKAH-LANGKAH JAHITAN SEMENTARA</h1>
-                    <p class="text-lg text-black font-slab">Pegang fabrik dan jarum anda. Ikut tutorial langkah demi langkah di bawah.</p>
+                    <p class="text-lg font-sans font-medium text-gray-700">Pegang fabrik dan jarum anda. Ikut tutorial langkah demi langkah di bawah.</p>
                 </div>
 
                 <!-- Video 1: Kasar -->
                 <div class="glass-card p-8 mb-12 border-t-4 border-blue-500">
-                    <h3 class="text-3xl font-heading font-bold mb-6 text-gray-900 flex items-center gap-3"><span class="w-10 h-10 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center">1</span> Jelujur Kasar</h3>
-                    <div class="relative w-full aspect-video bg-gray-900 group cursor-pointer flex items-center justify-center rounded-2xl overflow-hidden shadow-xl mb-8 border border-gray-200">
-                        <img src="https://images.unsplash.com/photo-1584031633519-74d326462eb6?auto=format&fit=crop&q=80" class="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-50 transition-opacity duration-500">
+                    <h3 class="text-3xl font-heading font-bold mb-6 text-gray-900 flex items-center gap-3">Jelujur Kasar</h3>
+                    <div onclick="openVideoModal('1Oa3YS_4DQuxi5qYAOmpZpC8V3tFTQWYT')" class="relative w-full aspect-video bg-gray-900 group cursor-pointer flex items-center justify-center rounded-2xl overflow-hidden shadow-xl mb-8 border border-gray-200">
+                        <img src="kasar.png" class="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-50 transition-opacity duration-500" alt="Video">
                         <div class="w-20 h-20 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center z-10 group-hover:scale-110 transition-transform duration-300 border border-white/50">
                             <i data-lucide="play" class="w-10 h-10 text-white ml-1"></i>
                         </div>
@@ -1142,9 +1206,9 @@
 
                 <!-- Video 2: Panjang Pendek -->
                 <div class="glass-card p-8 mb-12 border-t-4 border-blue-500">
-                    <h3 class="text-3xl font-heading font-bold mb-6 text-gray-900 flex items-center gap-3"><span class="w-10 h-10 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center">2</span> Jelujur Panjang Pendek</h3>
-                    <div class="relative w-full aspect-video bg-gray-900 group cursor-pointer flex items-center justify-center rounded-2xl overflow-hidden shadow-xl mb-8 border border-gray-200">
-                        <img src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?auto=format&fit=crop&q=80" class="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-50 transition-opacity duration-500">
+                    <h3 class="text-3xl font-heading font-bold mb-6 text-gray-900 flex items-center gap-3">Jelujur Panjang Pendek</h3>
+                    <div onclick="openVideoModal('1GCIGBdrU8tDSHL6AVVqlaEVKeh4U54j-')" class="relative w-full aspect-video bg-gray-900 group cursor-pointer flex items-center justify-center rounded-2xl overflow-hidden shadow-xl mb-8 border border-gray-200">
+                        <img src="pendek.png" class="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-50 transition-opacity duration-500" alt="Video">
                         <div class="w-20 h-20 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center z-10 group-hover:scale-110 transition-transform duration-300 border border-white/50">
                             <i data-lucide="play" class="w-10 h-10 text-white ml-1"></i>
                         </div>
@@ -1158,8 +1222,8 @@
 
                 <!-- Navigation -->
                 <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mt-8 pt-8 border-t border-gray-200">
-                    <button onclick="openJenisMata('detail', 'sementara')" class="px-8 py-4 rounded-full bg-gray-100 text-gray-700 font-heading font-semibold hover:bg-gray-200 transition flex items-center gap-2 w-full sm:w-auto justify-center"><i data-lucide="arrow-left" class="w-5 h-5"></i> Kembali</button>
-                    <button onclick="openJenisMata('detail', 'penyambung')" class="px-8 py-4 rounded-full bg-indigo-600 text-white font-heading font-semibold hover:bg-indigo-700 transition flex items-center gap-2 shadow-lg shadow-indigo-200 w-full sm:w-auto justify-center">Seterusnya (Penyambung) <i data-lucide="arrow-right" class="w-5 h-5"></i></button>
+                    <button onclick="openJenisMata('detail', 'sementara')" class="px-8 py-4 rounded-full bg-gradient-to-r from-rose-500 to-pink-600 text-white font-heading font-semibold transition-all duration-150 shadow-[0_6px_0_#881337] hover:shadow-[0_4px_0_#881337] hover:translate-y-[2px] active:shadow-[0_0px_0_#881337] active:translate-y-[6px] flex items-center gap-2 w-full sm:w-auto justify-center group"><i data-lucide="arrow-left" class="w-5 h-5 transform group-hover:-translate-x-1 transition-transform"></i> Kembali</button>
+                    <button onclick="openJenisMata('detail', 'penyambung')" class="px-8 py-4 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-heading font-semibold transition-all duration-150 shadow-[0_6px_0_#312e81] hover:shadow-[0_4px_0_#312e81] hover:translate-y-[2px] active:shadow-[0_0px_0_#312e81] active:translate-y-[6px] flex items-center gap-2 w-full sm:w-auto justify-center group">Seterusnya (Penyambung) <i data-lucide="arrow-right" class="w-5 h-5 transform group-hover:translate-x-1 transition-transform"></i></button>
                 </div>
             </div>
 
@@ -1167,12 +1231,12 @@
             <div id="jm-video-penyambung" class="hidden fade-in-el pt-8 max-w-4xl mx-auto">
                 <div class="text-center mb-12">
                     <h1 class="text-4xl font-heading font-black text-gradient mb-4 uppercase tracking-wide">LANGKAH-LANGKAH JAHITAN PENYAMBUNG</h1>
-                    <p class="text-lg text-black font-slab">Pastikan jahitan anda teguh. Ikuti panduan video di bawah.</p>
+                    <p class="text-lg font-sans font-medium text-gray-700">Pastikan jahitan anda teguh. Ikuti panduan video di bawah.</p>
                 </div>
 
                 <div class="glass-card p-8 mb-12 border-t-4 border-rose-500">
-                    <h3 class="text-3xl font-heading font-bold mb-6 text-gray-900 flex items-center gap-3"><span class="w-10 h-10 bg-rose-100 text-rose-600 rounded-xl flex items-center justify-center">1</span> Jahitan Kia</h3>
-                    <div class="relative w-full aspect-video bg-gray-900 group cursor-pointer flex items-center justify-center rounded-2xl overflow-hidden shadow-xl mb-8 border border-gray-200">
+                    <h3 class="text-3xl font-heading font-bold mb-6 text-gray-900 flex items-center gap-3">Jahitan Kia</h3>
+                    <div onclick="openVideoModal('REPLACE_WITH_GOOGLE_DRIVE_FILE_ID')" class="relative w-full aspect-video bg-gray-900 group cursor-pointer flex items-center justify-center rounded-2xl overflow-hidden shadow-xl mb-8 border border-gray-200">
                         <div class="w-20 h-20 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center z-10 group-hover:scale-110 transition-transform duration-300 border border-white/50">
                             <i data-lucide="play" class="w-10 h-10 text-white ml-1"></i>
                         </div>
@@ -1187,8 +1251,8 @@
                 </div>
 
                 <div class="glass-card p-8 mb-12 border-t-4 border-rose-500">
-                    <h3 class="text-3xl font-heading font-bold mb-6 text-gray-900 flex items-center gap-3"><span class="w-10 h-10 bg-rose-100 text-rose-600 rounded-xl flex items-center justify-center">2</span> Jahitan Halus</h3>
-                    <div class="relative w-full aspect-video bg-gray-900 group cursor-pointer flex items-center justify-center rounded-2xl overflow-hidden shadow-xl mb-8 border border-gray-200">
+                    <h3 class="text-3xl font-heading font-bold mb-6 text-gray-900 flex items-center gap-3">Jahitan Halus</h3>
+                    <div onclick="openVideoModal('REPLACE_WITH_GOOGLE_DRIVE_FILE_ID')" class="relative w-full aspect-video bg-gray-900 group cursor-pointer flex items-center justify-center rounded-2xl overflow-hidden shadow-xl mb-8 border border-gray-200">
                         <div class="w-20 h-20 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center z-10 group-hover:scale-110 transition-transform duration-300 border border-white/50">
                             <i data-lucide="play" class="w-10 h-10 text-white ml-1"></i>
                         </div>
@@ -1202,8 +1266,8 @@
                 </div>
 
                 <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mt-8 pt-8 border-t border-gray-200">
-                    <button onclick="openJenisMata('detail', 'penyambung')" class="px-8 py-4 rounded-full bg-gray-100 text-gray-700 font-heading font-semibold hover:bg-gray-200 transition flex items-center gap-2 w-full sm:w-auto justify-center"><i data-lucide="arrow-left" class="w-5 h-5"></i> Kembali</button>
-                    <button onclick="openJenisMata('detail', 'pengemas')" class="px-8 py-4 rounded-full bg-indigo-600 text-white font-heading font-semibold hover:bg-indigo-700 transition flex items-center gap-2 shadow-lg shadow-indigo-200 w-full sm:w-auto justify-center">Seterusnya (Pengemas) <i data-lucide="arrow-right" class="w-5 h-5"></i></button>
+                    <button onclick="openJenisMata('detail', 'penyambung')" class="px-8 py-4 rounded-full bg-gradient-to-r from-rose-500 to-pink-600 text-white font-heading font-semibold transition-all duration-150 shadow-[0_6px_0_#881337] hover:shadow-[0_4px_0_#881337] hover:translate-y-[2px] active:shadow-[0_0px_0_#881337] active:translate-y-[6px] flex items-center gap-2 w-full sm:w-auto justify-center group"><i data-lucide="arrow-left" class="w-5 h-5 transform group-hover:-translate-x-1 transition-transform"></i> Kembali</button>
+                    <button onclick="openJenisMata('detail', 'pengemas')" class="px-8 py-4 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-heading font-semibold transition-all duration-150 shadow-[0_6px_0_#312e81] hover:shadow-[0_4px_0_#312e81] hover:translate-y-[2px] active:shadow-[0_0px_0_#312e81] active:translate-y-[6px] flex items-center gap-2 w-full sm:w-auto justify-center group">Seterusnya (Pengemas) <i data-lucide="arrow-right" class="w-5 h-5 transform group-hover:translate-x-1 transition-transform"></i></button>
                 </div>
             </div>
 
@@ -1211,13 +1275,13 @@
             <div id="jm-video-pengemas" class="hidden fade-in-el pt-8 max-w-4xl mx-auto">
                 <div class="text-center mb-12">
                     <h1 class="text-4xl font-heading font-black text-gradient mb-4 uppercase tracking-wide">LANGKAH-LANGKAH JAHITAN PENGEMAS</h1>
-                    <p class="text-lg text-black font-slab">Pelajari cara mengunci tepi fabrik dengan cantik dan kemas.</p>
+                    <p class="text-lg font-sans font-medium text-gray-700">Pelajari cara mengunci tepi fabrik dengan cantik dan kemas.</p>
                 </div>
 
                 <div class="glass-card p-8 mb-12 border-t-4 border-emerald-500">
-                    <h3 class="text-3xl font-heading font-bold mb-6 text-gray-900 flex items-center gap-3"><span class="w-10 h-10 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center">1</span> Insang Pari</h3>
-                    <div class="relative w-full aspect-video bg-gray-900 group cursor-pointer flex items-center justify-center rounded-2xl overflow-hidden shadow-xl mb-8 border border-gray-200">
-                        <img src="https://images.unsplash.com/photo-1610486001099-0d199846b412?auto=format&fit=crop&q=80" class="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-50 transition-opacity duration-500">
+                    <h3 class="text-3xl font-heading font-bold mb-6 text-gray-900 flex items-center gap-3">Insang Pari</h3>
+                    <div onclick="openVideoModal('REPLACE_WITH_GOOGLE_DRIVE_FILE_ID')" class="relative w-full aspect-video bg-gray-900 group cursor-pointer flex items-center justify-center rounded-2xl overflow-hidden shadow-xl mb-8 border border-gray-200">
+                        <img src="https://images.unsplash.com/photo-1610486001099-0d199846b412?auto=format&fit=crop&q=80" class="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-50 transition-opacity duration-500" alt="Video">
                         <div class="w-20 h-20 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center z-10 group-hover:scale-110 transition-transform duration-300 border border-white/50">
                             <i data-lucide="play" class="w-10 h-10 text-white ml-1"></i>
                         </div>
@@ -1231,9 +1295,9 @@
                 </div>
 
                 <div class="glass-card p-8 mb-12 border-t-4 border-emerald-500">
-                    <h3 class="text-3xl font-heading font-bold mb-6 text-gray-900 flex items-center gap-3"><span class="w-10 h-10 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center">2</span> Silang Pangkah</h3>
-                    <div class="relative w-full aspect-video bg-gray-900 group cursor-pointer flex items-center justify-center rounded-2xl overflow-hidden shadow-xl mb-8 border border-gray-200">
-                        <img src="https://images.unsplash.com/photo-1544453816-562a26511a7c?auto=format&fit=crop&q=80" class="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-50 transition-opacity duration-500">
+                    <h3 class="text-3xl font-heading font-bold mb-6 text-gray-900 flex items-center gap-3">Silang Pangkah</h3>
+                    <div onclick="openVideoModal('REPLACE_WITH_GOOGLE_DRIVE_FILE_ID')" class="relative w-full aspect-video bg-gray-900 group cursor-pointer flex items-center justify-center rounded-2xl overflow-hidden shadow-xl mb-8 border border-gray-200">
+                        <img src="https://images.unsplash.com/photo-1544453816-562a26511a7c?auto=format&fit=crop&q=80" class="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-50 transition-opacity duration-500" alt="Video">
                         <div class="w-20 h-20 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center z-10 group-hover:scale-110 transition-transform duration-300 border border-white/50">
                             <i data-lucide="play" class="w-10 h-10 text-white ml-1"></i>
                         </div>
@@ -1247,9 +1311,9 @@
                 </div>
 
                 <div class="glass-card p-8 mb-12 border-t-4 border-emerald-500">
-                    <h3 class="text-3xl font-heading font-bold mb-6 text-gray-900 flex items-center gap-3"><span class="w-10 h-10 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center">3</span> Lilit Ubi</h3>
-                    <div class="relative w-full aspect-video bg-gray-900 group cursor-pointer flex items-center justify-center rounded-2xl overflow-hidden shadow-xl mb-8 border border-gray-200">
-                        <img src="https://images.unsplash.com/photo-1598466633633-9111b058a9e6?auto=format&fit=crop&q=80" class="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-50 transition-opacity duration-500">
+                    <h3 class="text-3xl font-heading font-bold mb-6 text-gray-900 flex items-center gap-3">Lilit Ubi</h3>
+                    <div onclick="openVideoModal('REPLACE_WITH_GOOGLE_DRIVE_FILE_ID')" class="relative w-full aspect-video bg-gray-900 group cursor-pointer flex items-center justify-center rounded-2xl overflow-hidden shadow-xl mb-8 border border-gray-200">
+                        <img src="https://images.unsplash.com/photo-1598466633633-9111b058a9e6?auto=format&fit=crop&q=80" class="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-50 transition-opacity duration-500" alt="Video">
                         <div class="w-20 h-20 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center z-10 group-hover:scale-110 transition-transform duration-300 border border-white/50">
                             <i data-lucide="play" class="w-10 h-10 text-white ml-1"></i>
                         </div>
@@ -1263,8 +1327,8 @@
                 </div>
 
                 <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mt-8 pt-8 border-t border-gray-200">
-                    <button onclick="openJenisMata('detail', 'pengemas')" class="px-8 py-4 rounded-full bg-gray-100 text-gray-700 font-heading font-semibold hover:bg-gray-200 transition flex items-center gap-2 w-full sm:w-auto justify-center"><i data-lucide="arrow-left" class="w-5 h-5"></i> Kembali</button>
-                    <button onclick="switchTab('kuiz')" class="px-8 py-4 rounded-full bg-purple-600 text-white font-heading font-semibold hover:bg-purple-700 transition flex items-center gap-2 shadow-lg shadow-purple-200 w-full sm:w-auto justify-center">Seterusnya ke Kuiz Latih Tubi 🎯</button>
+                    <button onclick="openJenisMata('detail', 'pengemas')" class="px-8 py-4 rounded-full bg-gradient-to-r from-rose-500 to-pink-600 text-white font-heading font-semibold transition-all duration-150 shadow-[0_6px_0_#881337] hover:shadow-[0_4px_0_#881337] hover:translate-y-[2px] active:shadow-[0_0px_0_#881337] active:translate-y-[6px] flex items-center gap-2 w-full sm:w-auto justify-center group"><i data-lucide="arrow-left" class="w-5 h-5 transform group-hover:-translate-x-1 transition-transform"></i> Kembali</button>
+                    <button onclick="switchTab('kuiz')" class="px-8 py-4 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-heading font-semibold transition-all duration-150 shadow-[0_6px_0_#312e81] hover:shadow-[0_4px_0_#312e81] hover:translate-y-[2px] active:shadow-[0_0px_0_#312e81] active:translate-y-[6px] flex items-center gap-2 w-full sm:w-auto justify-center group">Seterusnya ke Kuiz Latih Tubi 🎯 <i data-lucide="arrow-right" class="w-5 h-5 transform group-hover:translate-x-1 transition-transform ml-1"></i></button>
                 </div>
             </div>
 
@@ -1276,7 +1340,7 @@
         <div id="kuiz" class="tab-content hidden">
             <!-- Header Gamifikasi -->
             <div class="text-center max-w-3xl mx-auto mb-12 fade-in pt-8">
-                <span class="w-24 h-24 bg-gradient-to-br from-purple-500 to-indigo-600 text-white rounded-[2rem] flex items-center justify-center mx-auto mb-8 shadow-[0_15px_30px_rgba(99,102,241,0.4)] transform rotate-3 hover:rotate-12 transition-transform duration-300">
+                <span class="w-24 h-24 bg-gradient-to-br from-purple-500 to-indigo-600 text-white rounded-[2rem] flex items-center justify-center mx-auto mb-8 shadow-[0_15px_30px_rgba(99,102,241,0.4)] animate-bounce">
                     <i data-lucide="gamepad-2" class="w-12 h-12"></i>
                 </span>
                 <h1 class="text-5xl sm:text-6xl font-heading font-black text-gradient mb-4 tracking-tight">StitchLab Gamifikasi</h1>
@@ -1321,6 +1385,17 @@
                     </p>
                 </div>
             </div>
+
+            <!-- Navigasi Bawah: Kuiz Gamifikasi -->
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mt-10 pt-8 border-t border-gray-200/50 max-w-6xl mx-auto w-full px-4">
+                <button onclick="openJenisMata('main')" class="px-8 py-4 rounded-full bg-gradient-to-r from-rose-500 to-pink-600 text-white font-heading font-semibold transition-all duration-150 shadow-[0_6px_0_#881337] hover:shadow-[0_4px_0_#881337] hover:translate-y-[2px] active:shadow-[0_0px_0_#881337] active:translate-y-[6px] flex items-center gap-2 w-full sm:w-auto justify-center group">
+                    <i data-lucide="arrow-left" class="w-5 h-5 transform group-hover:-translate-x-1 transition-transform"></i> Kembali
+                </button>
+                <button onclick="switchTab('tanya-ai')" class="px-8 py-4 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-heading font-semibold hover:from-indigo-600 hover:to-purple-700 transition-all duration-150 shadow-[0_6px_0_#312e81] hover:shadow-[0_4px_0_#312e81] hover:translate-y-[2px] active:shadow-[0_0px_0_#312e81] active:translate-y-[6px] flex items-center gap-2 w-full sm:w-auto justify-center group">
+                        Seterusnya <i data-lucide="arrow-right" class="w-5 h-5 transform group-hover:translate-x-1 transition-transform"></i>
+                </button>
+            </div>
+
         </div>
 
         <!-- ==========================================
@@ -1370,6 +1445,17 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Navigasi Bawah: Tanya AI -->
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mt-16 pt-8 border-t border-gray-200/50 max-w-4xl mx-auto w-full px-4">
+                <button onclick="switchTab('kuiz')" class="px-8 py-4 rounded-full bg-gradient-to-r from-rose-500 to-pink-600 text-white font-heading font-semibold transition-all duration-150 shadow-[0_6px_0_#881337] hover:shadow-[0_4px_0_#881337] hover:translate-y-[2px] active:shadow-[0_0px_0_#881337] active:translate-y-[6px] flex items-center gap-2 w-full sm:w-auto justify-center group">
+                    <i data-lucide="arrow-left" class="w-5 h-5 transform group-hover:-translate-x-1 transition-transform"></i> Kembali
+                </button>
+                <button onclick="switchTab('maklumat')" class="px-8 py-4 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-heading font-semibold hover:from-indigo-600 hover:to-purple-700 transition-all duration-150 shadow-[0_6px_0_#312e81] hover:shadow-[0_4px_0_#312e81] hover:translate-y-[2px] active:shadow-[0_0px_0_#312e81] active:translate-y-[6px] flex items-center gap-2 w-full sm:w-auto justify-center group">
+                        Seterusnya <i data-lucide="arrow-right" class="w-5 h-5 transform group-hover:translate-x-1 transition-transform"></i>
+                </button>
+            </div>
+
         </div>
 
         <!-- ==========================================
@@ -1378,7 +1464,7 @@
         <div id="maklumat" class="tab-content hidden">
             <!-- Header Maklumat -->
             <div class="text-center max-w-2xl mx-auto mb-16 fade-in pt-8">
-                <div class="w-20 h-20 rounded-[2rem] bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center mx-auto mb-6 text-white shadow-[0_15px_30px_rgba(79,70,229,0.4)] transform rotate-3 hover:-rotate-3 transition-transform duration-500">
+                <div class="w-20 h-20 rounded-[2rem] bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center mx-auto mb-6 text-white shadow-[0_15px_30px_rgba(79,70,229,0.4)] animate-bounce">
                     <i data-lucide="info" class="w-10 h-10"></i>
                 </div>
                 <h1 class="text-5xl font-heading font-black text-gradient mb-4 tracking-tight">MAKLUMAT MODUL</h1>
@@ -1430,7 +1516,7 @@
                                 </div>
                                 <div class="flex-grow border-b border-gray-100 pb-4">
                                     <p class="text-xs sm:text-sm font-bold tracking-widest text-[#1E3A8A] uppercase mb-1">Nama Modul</p>
-                                    <p class="text-3xl sm:text-4xl font-heading font-black text-gradient drop-shadow-sm tracking-tight leading-none">StitchLab</p>
+                                    <p class="text-2xl sm:text-3xl font-heading font-bold text-gradient drop-shadow-sm tracking-tight leading-none">StitchLab</p>
                                 </div>
                             </div>
 
@@ -1441,7 +1527,7 @@
                                 </div>
                                 <div class="flex-grow border-b border-gray-100 pb-4">
                                     <p class="text-xs sm:text-sm font-bold tracking-widest text-[#1E3A8A] uppercase mb-1">Mata Pelajaran</p>
-                                    <p class="text-lg sm:text-xl font-bold text-[#64748B] leading-tight">Asas Jahitan Pendidikan Khas Tingkatan 1</p>
+                                    <p class="text-lg sm:text-xl font-black bg-gradient-to-b from-gray-700 via-black to-gray-900 bg-clip-text text-transparent drop-shadow-sm leading-tight">Asas Jahitan Pendidikan Khas Tingkatan 1</p>
                                 </div>
                             </div>
 
@@ -1452,7 +1538,7 @@
                                 </div>
                                 <div class="flex-grow border-b border-gray-100 pb-4">
                                     <p class="text-xs sm:text-sm font-bold tracking-widest text-[#B91C1C] uppercase mb-1">Topik</p>
-                                    <p class="text-lg sm:text-xl font-bold text-[#64748B] leading-tight">Menjahit Jahitan Asas</p>
+                                    <p class="text-lg sm:text-xl font-black bg-gradient-to-b from-gray-700 via-black to-gray-900 bg-clip-text text-transparent drop-shadow-sm leading-tight">Menjahit Jahitan Asas</p>
                                 </div>
                             </div>
 
@@ -1463,7 +1549,7 @@
                                 </div>
                                 <div class="flex-grow border-b border-gray-100 pb-4">
                                     <p class="text-xs sm:text-sm font-bold tracking-widest text-[#047857] uppercase mb-1">Pembangun Modul</p>
-                                    <p class="text-lg sm:text-xl font-bold text-[#64748B] leading-tight">Suhayl Adzim Bin Agus Supandi</p>
+                                    <p class="text-lg sm:text-xl font-black bg-gradient-to-b from-gray-700 via-black to-gray-900 bg-clip-text text-transparent drop-shadow-sm leading-tight">Suhayl Adzim Bin Agus Supandi</p>
                                 </div>
                             </div>
 
@@ -1474,7 +1560,7 @@
                                 </div>
                                 <div class="flex-grow border-b border-gray-100 pb-4">
                                     <p class="text-xs sm:text-sm font-bold tracking-widest text-[#B45309] uppercase mb-1">Pensyarah Penyelia</p>
-                                    <p class="text-lg sm:text-xl font-bold text-[#64748B] leading-tight">Prof. Madya Dr. Mohamed Nor Azhari Bin Azman</p>
+                                    <p class="text-lg sm:text-xl font-black bg-gradient-to-b from-gray-700 via-black to-gray-900 bg-clip-text text-transparent drop-shadow-sm leading-tight">Prof. Madya Dr. Mohamed Nor Azhari Bin Azman</p>
                                 </div>
                             </div>
 
@@ -1485,7 +1571,7 @@
                                 </div>
                                 <div class="flex-grow pb-2">
                                     <p class="text-xs sm:text-sm font-bold tracking-widest text-[#4338CA] uppercase mb-1">Institusi</p>
-                                    <p class="text-lg sm:text-xl font-bold text-[#64748B] leading-tight">Universiti Pendidikan Sultan Idris</p>
+                                    <p class="text-lg sm:text-xl font-black bg-gradient-to-b from-gray-700 via-black to-gray-900 bg-clip-text text-transparent drop-shadow-sm leading-tight">Universiti Pendidikan Sultan Idris</p>
                                 </div>
                             </div>
 
@@ -1508,6 +1594,17 @@
                     </div>
 
                 </div>
+
+                <!-- Navigasi Bawah: Maklumat -->
+                <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mt-12 pt-8 border-t border-gray-200/50 w-full px-4 sm:px-0">
+                    <button onclick="switchTab('tanya-ai')" class="px-8 py-4 rounded-full bg-gradient-to-r from-rose-500 to-pink-600 text-white font-heading font-semibold transition-all duration-150 shadow-[0_6px_0_#881337] hover:shadow-[0_4px_0_#881337] hover:translate-y-[2px] active:shadow-[0_0px_0_#881337] active:translate-y-[6px] flex items-center gap-2 w-full sm:w-auto justify-center group">
+                        <i data-lucide="arrow-left" class="w-5 h-5 transform group-hover:-translate-x-1 transition-transform"></i> Kembali
+                    </button>
+                    <button onclick="switchTab('utama')" class="px-8 py-4 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-heading font-semibold hover:from-indigo-600 hover:to-purple-700 transition-all duration-150 shadow-[0_6px_0_#312e81] hover:shadow-[0_4px_0_#312e81] hover:translate-y-[2px] active:shadow-[0_0px_0_#312e81] active:translate-y-[6px] flex items-center gap-2 w-full sm:w-auto justify-center group">
+                        Tamat / Utama <i data-lucide="home" class="w-5 h-5 ml-1 transform group-hover:scale-110 transition-transform"></i>
+                    </button>
+                </div>
+
             </div>
         </div>
 
@@ -1524,6 +1621,37 @@
             </p>
         </div>
     </footer>
+
+    <!-- ==========================================
+         VIDEO POPUP MODAL (REUSABLE)
+    ========================================== -->
+    <div id="video-modal" class="fixed inset-0 z-[100] flex items-center justify-center">
+        <!-- Backdrop Hitam Blur (Klik untuk tutup) -->
+        <div class="video-backdrop absolute inset-0 cursor-pointer" onclick="closeVideoModal()"></div>
+        
+        <!-- Video Container -->
+        <div class="video-content relative bg-gray-900 shadow-2xl flex items-center justify-center">
+            
+            <!-- Butang Tutup (X) -->
+            <button onclick="closeVideoModal()" class="video-close-btn absolute -top-4 -right-4 sm:-top-5 sm:-right-5 w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-full text-gray-800 flex items-center justify-center z-50">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+
+            <!-- Loading Spinner -->
+            <div id="video-spinner" class="absolute inset-0 flex flex-col items-center justify-center text-white z-0">
+                <i data-lucide="loader-2" class="w-10 h-10 animate-spin mb-3 text-indigo-400"></i>
+                <span class="font-medium text-sm text-gray-300 tracking-wider">Memuatkan Video...</span>
+            </div>
+
+            <!-- Google Drive Iframe -->
+            <iframe 
+                id="video-iframe"
+                class="absolute inset-0 w-full h-full rounded-[20px] z-10 border-0 opacity-0 transition-opacity duration-300"
+                src="" 
+                allow="autoplay; fullscreen">
+            </iframe>
+        </div>
+    </div>
 
     <!-- JavaScript Logic -->
     <script>
@@ -1651,6 +1779,76 @@
                 window.currentAudioPlayer = null;
             };
         }
+
+        // ==========================================
+        // VIDEO POPUP LOGIC
+        // ==========================================
+        function openVideoModal(driveData) {
+            const modal = document.getElementById('video-modal');
+            const iframe = document.getElementById('video-iframe');
+            const spinner = document.getElementById('video-spinner');
+            
+            // Tunjukkan spinner dan sembunyikan iframe
+            spinner.style.display = 'flex';
+            iframe.classList.remove('opacity-100');
+            iframe.classList.add('opacity-0');
+
+            // Proses Pautan Google Drive (Convert to Preview)
+            let embedUrl = '';
+            if (driveData.includes('drive.google.com')) {
+                embedUrl = driveData.replace(/\/view.*$/, '/preview');
+            } else {
+                // Jika hanya File ID diberikan
+                embedUrl = `https://drive.google.com/file/d/${driveData}/preview`;
+            }
+
+            // Masukkan source dan buka modal
+            iframe.src = embedUrl;
+            modal.classList.add('active');
+            
+            lucide.createIcons();
+        }
+
+        function closeVideoModal() {
+            const modal = document.getElementById('video-modal');
+            const iframe = document.getElementById('video-iframe');
+            
+            // Tutup modal
+            modal.classList.remove('active');
+            
+            // Berhentikan video sepenuhnya selepas animasi selesai
+            setTimeout(() => {
+                iframe.src = '';
+            }, 300);
+        }
+
+        function hideVideoSpinner() {
+            const iframe = document.getElementById('video-iframe');
+            const spinner = document.getElementById('video-spinner');
+            
+            // Jika iframe ada src (bukan dikosongkan sewaktu tutup), tunjukkan video
+            if (iframe.src && iframe.src !== window.location.href && iframe.src !== 'about:blank') {
+                spinner.style.display = 'none';
+                iframe.classList.remove('opacity-0');
+                iframe.classList.add('opacity-100');
+            }
+        }
+
+        // Tambah event listener selepas DOM dan fungsi sedia ada dimuatkan
+        const videoIframeEl = document.getElementById('video-iframe');
+        if (videoIframeEl) {
+            videoIframeEl.addEventListener('load', hideVideoSpinner);
+        }
+
+        // Tutup menggunakan keyboard (Tekan ESC)
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") {
+                const modal = document.getElementById('video-modal');
+                if (modal.classList.contains('active')) {
+                    closeVideoModal();
+                }
+            }
+        });
 
         // Logic Baru: Kawalan Audio & Loading Game Zep
         function manageGamificationAudio(activeTabId) {
